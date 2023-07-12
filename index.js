@@ -16,7 +16,7 @@ client.once(Events.ClientReady, () => {
 
 setInterval(async function() {
   getStatus();
-}, 3000);
+}, 300000);
 
 async function getStatus() {
   try {
