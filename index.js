@@ -1,7 +1,10 @@
 const { Client, User, Events, GatewayIntentBits } = require('discord.js');
 const axios = require('axios');
-const token = process.env['TOKEN'];
-const dmID = process.env['DiscordID'];
+
+const dotenv = require('dotenv');
+dotenv.config();
+const token = process.env.TOKEN;
+const dmID = process.env.DISCORD_ID;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const userID = { "id": dmID };
