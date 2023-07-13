@@ -36,7 +36,7 @@ async function getStatus() {
     for (const i in json) {
       for (const profiles in json[i]) {
         if (json[i][profiles]['current'] === true) {
-          if (json[i][profiles]['raw']['current_area'] == "Private Island") {
+          if (json[i][profiles]['raw']['current_area'] != "Private Island") {
 
             //Direct Message
             user.send('Not on Island')
