@@ -30,7 +30,8 @@ async function getStatus() {
         return response.data;
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
+        console.log('error');
       });
 
     for (const i in json) {
@@ -40,7 +41,7 @@ async function getStatus() {
 
             //Direct Message
             user.send('Not on Island')
-              .then(console.log("Not on Island"))
+              .then(message => console.log(`Sent message: ${message.content} @ ${message.createdAt}`))
               .catch(console.error);
           }
         }
