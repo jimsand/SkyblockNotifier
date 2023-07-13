@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 const token = process.env.TOKEN;
 const dmID = process.env.DISCORD_ID;
+const uuid = process.env.UUID;
+const apiKey = process.env.API_KEY;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const userID = { "id": dmID };
@@ -23,7 +25,7 @@ async function getStatus() {
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: 'https://sky.shiiyu.moe/api/v2/profile/Ianoda/',
+      url: 'https://api.hypixel.net/status?uuid='+ uuid + '&key=' + apiKey,
     };
     const json = await axios.request(config)
       .then((response) => {
@@ -34,18 +36,12 @@ async function getStatus() {
         console.log('error');
       });
 
-    for (const i in json) {
-      for (const profiles in json[i]) {
-        if (json[i][profiles]['current'] === true) {
-          if (json[i][profiles]['raw']['current_area'] != "Private Island") {
 
-            //Direct Message
-            user.send('Not on Island')
-              .then(message => console.log(`Sent message: ${message.content} @ ${message.createdAt}`))
-              .catch(console.error);
-          }
-        }
-      }
+      if (json.session.mode != "dynamic") {
+        //Direct Message
+        user.send('Not on Island')
+          .then(message => console.log(`Sent message: ${message.content} @ ${message.createdAt}`))
+          .catch(console.error);
     }
 
   } catch (error) {
