@@ -40,7 +40,7 @@ async function getStatus() {
       if (json.session.mode != "dynamic") {
         //Direct Message
         user.send('Not on Island')
-          .then(message => console.log(`Sent message: ${message.content} @ ${message.createdAt}`))
+          .then(message => console.log(`${message.content} @ ${message.createdAt}`))
           .catch(console.error);
     }
 
