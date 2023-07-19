@@ -11,6 +11,7 @@ const apiKey = process.env.API_KEY;
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const userID = { "id": dmID };
 const user = new User(client, userID);
+var flag = true;
 
 client.once(Events.ClientReady, () => {
   console.log('Ready!');
@@ -36,9 +37,13 @@ async function getStatus() {
         console.log('error');
       });
 
+      if (json.session.mode == "dynamic"){
+        flag = true;
+      }
 
-      if (json.session.mode != "dynamic") {
+      if (json.session.mode != "dynamic" && flag == true) {
         //Direct Message
+        flag = false;
         user.send('Not on Island')
           .then(message => console.log(`${message.content} @ ${message.createdAt}`))
           .catch(console.error);
